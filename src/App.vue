@@ -22,7 +22,7 @@
       // AppFotter
     },
     mounted(){
-        
+         
     }
   }
 
@@ -35,11 +35,16 @@
 // lang 指定使用的预处理语言
 // scoped 锁定css作用域，只在当前组件生效
 // <style lang="scss" scoped>
-body,html,#app,main{
+body,html,#app{
   height: 100%;
+  width: 100%;
+  position: relative;
   main{
-    padding-top: 1.173333rem;
-    padding-bottom: 1.6rem;
+    position: absolute;
+    width: 100%;
+    top: 1.173333rem;
+    bottom: 1.6rem;
+    overflow: auto;
   }
 }
 </style>

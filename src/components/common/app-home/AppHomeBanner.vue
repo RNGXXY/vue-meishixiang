@@ -46,13 +46,12 @@ export default {
         //   console.log('this is current swiper instance object', this.swiper)
         //   this.swiper.slideTo(3, 1000, false)
     },
-    beforeCreate(){
-        this.$http({
-            url:'/banner/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0',
+    async beforeCreate(){
+        let res = await this.$http({
+            url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0',
             react: false
-        }).then(res=>{
-            this.billboards = res.data.runBanner
-        })
+        },true)
+        this.billboards = res.data.data.runBanner
     }
 }
 

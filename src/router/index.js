@@ -12,7 +12,7 @@ import AppOrder from '@pages/order/AppOrder'
 import AppMine from '@pages/mine/AppMine'
 import AppNotFound from '@pages/not-found/AppNotFound'
 import AppMeal from '@pages/meal/AppMeal'
-
+import AppLogin from '@pages/login/AppLogin'
 
 // 4、路由表
 const routes= [
@@ -28,9 +28,10 @@ const routes= [
 
     },
     {
-        path:'/order',
+        path:'/order/:url',    //路由组件传参
         name:'order',
-        component:AppOrder    
+        component:AppOrder,
+        props:true    
     },
     {
         path:'/mine',
@@ -41,6 +42,11 @@ const routes= [
         path:'/meal',
         name:'meal',
         component:AppMeal    
+    },
+    {
+        path:'/login',
+        name:'login',
+        component:AppLogin    
     },
     {
         path:'/not-found',

@@ -14,7 +14,7 @@ import router from './router'
 // Vue.config.devtools = 'false'
 // 去掉vue默认在config输出的那两行 
 Vue.config.productionTip = false
-
+ 
 // 根实例 
 new Vue({
   //控制往根组件App里放什么东西，在根实例里render函数渲染根组件 

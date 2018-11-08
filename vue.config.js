@@ -7,7 +7,7 @@ function resolve(url){
 module.exports={
     devServer:{
         port:8000,
-        proxy:{
+        proxy:{ 
             '/waimai':{
                 target:'https://h5.ele.me/restapi/shopping/',
                 changeOrigin:true,
@@ -15,13 +15,21 @@ module.exports={
                     '^/waimai': ''
                 }
             },
-            '/banner':{
+            '/jiyejia':{
                 target:'http://jyj.4008-197-197.com/',
                 changeOrigin:true,
                 pathRewrite:{
-                    '^/banner': ''
+                    '^/jiyejia': ''
+                }
+            },
+            '/mz': {
+                target: 'https://m.maizuo.com/',
+                changeOrigin: true,
+                pathRewrite: {
+                  '^/mz': ''
                 }
             }
+            
         }
     },
     // chainWebpack进行webpack中多个选项的配置

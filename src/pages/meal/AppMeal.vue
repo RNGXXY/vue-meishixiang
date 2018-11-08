@@ -13,21 +13,32 @@
                 <div class="ng-binding">热销</div>
             </div>
             <div class="seal-list">
-                <div class="seal-item">
-                    <div class="item-img">
+                <swiper :options="mealSwiperOption" ref="mealSwiper">
+                    <swiper-slide
+                        v-for="m in 5"
+                        :key="m"
+                    >
 
-                    </div>
-                    <div class="item-name">
-                        aa
-                    </div>
-                    <div class="item-price">
-                        ￥<span>22</span>
-                    </div>
-                    <div class="item-order">
-                        <span>选套餐</span>
-                        <i>v</i>
-                    </div>
-                </div>
+                        <div class="seal-item">
+                            <div class="item-img">
+                                <img src="http://51wm-pic1.oss-cn-hangzhou.aliyuncs.com/product/c2aa8906-2389-4c2e-af01-41b9566089bb.png" alt="">
+                            </div>
+                            <div class="item-name">
+                                照烧鸡排饭（大）套餐
+                            </div>
+                            <div class="item-price">
+                                ￥<span>22</span>
+                            </div>
+                            <div class="item-order">
+                                <span>选套餐</span>
+                                <i class="fa fa-plus-circle"></i>
+                            </div>
+                        </div>
+
+                    </swiper-slide>
+                </swiper>
+                
+                
             </div>
         </div>
     </div>
@@ -36,8 +47,30 @@
 
 <script>
 export default {
-    
+    data() {
+        return {       
+            mealSwiperOption: {
+                // some swiper options/callbacks
+                // 所有的参数同 swiper 官方 api 参数
+                
+                slidesPerView : 3,
+                slidesPerGroup : 3,
+                freeMode : true,
+                freeModeMomentumBounceRatio : 3,    //反弹，值越大产生的边界反弹效果越明显，反弹距离越大。
+                
+            },
+            billboards:[]
+        }
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mealSwiper.swiper
+      }
+    },
 }
+// https://h5.ele.me/pizza/shopping/restaurants/431375/batch_shop?user_id=114716584&
+// code=0.003509798536866393&extras=%5B%22activities%22%2C%22albums%22%2C%22license%22%2C%22identification%
+// 22%2C%22qualification%22%5D&terminal=h5&latitude=39.135884&longitude=117.210061
 </script>
 
 <style lang="scss">
@@ -53,7 +86,7 @@ export default {
             p{
                 width: 8rem;
                 height: 100%;
-                line-height: 20px;
+                line-height: .533333rem;
                 margin: 0;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -72,23 +105,23 @@ export default {
                 height: 40px;
                 width: 40px;
                 position: absolute;
-                top: -22px;
+                top: -0.586667rem;
                 left: 0;
                 z-index: 3;
                 word-wrap: break-word;
-                font-size: 14px;
+                font-size: .373333rem;
                 text-align: center;
-                padding: 2px;
+                padding: .053333rem;
 
             }
             .seal-list{
                 .seal-item{
-                    border-radius: 15px;
-                    margin: 0 5px;
-                    padding: 10px;
-                    width: 120px;
-                    height: 175px;
-                    box-shadow: 0 0 5px #888888;
+                    border-radius: .4rem;
+                    margin: 0 .133333rem;
+                    padding: .266667rem;
+                    width: 3.2rem;
+                    height: 4.613333rem;
+                    box-shadow: 0 0 .133333rem #888888 inset;
                     color: #333333;
                     .item-img{
                         height: 2.133333rem;
@@ -105,6 +138,10 @@ export default {
                         text-align: center;
                         border-top: 2px solid #EF7F1D;
                         font-size: .373333rem;
+                        font-weight: bold;
+                        overflow: hidden;
+                        text-overflow: ellipsis; 
+                        white-space: nowrap;
                     }
                     .item-price{
                         height: .586667rem;
@@ -114,19 +151,22 @@ export default {
                         font-weight: bold;
                     }
                     .item-order{
-                        height: .693333rem;
+                        height: .8rem;
                         width: 1.84rem;
                         padding: .053333rem;
                         color: #FFF;
-                        font-size: 13px;
-                        border: #EF7F1D 2px solid;
+                        font-size: .346667rem;
+                        border: #EF7F1D .053333rem solid;
                         background: #EF7F1D;
-                        font-size: 13px;
-                        border-radius: 12px;
+                        font-size: .346667rem;
+                        border-radius: .32rem;
                         float: right;
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        i{
+                            font-size: .533333rem;
+                        }
                     }
                 }
             }

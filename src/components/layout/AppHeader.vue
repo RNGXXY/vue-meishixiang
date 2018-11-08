@@ -8,7 +8,7 @@
                     </div>
                     <span class="header-title">{{title}}</span>
                 </div>
-                <div class="header-right">
+                <div class="header-right"  v-if="isHome">
                     <span >哈哈</span>
                 </div>
             </div>
@@ -16,7 +16,7 @@
         <app-fotter> </app-fotter>
     </div>
 </template>
-
+ 
 <script>
 import AppFotter from '@c/layout/AppFotter'
 export default {
@@ -33,7 +33,7 @@ export default {
       createTitle(to){
           let _to = to || this.$route
         switch(_to.name){
-            case 'order' :return '美食巷订单';
+            case 'order' :return '美食巷店铺';
             case 'mine' :return '我的美食巷';
             case 'meal' :return '美食巷美食';
             default : return '美食巷'

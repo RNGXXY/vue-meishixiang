@@ -20,7 +20,7 @@ export default {
         return{
             navs:[
                 { id: 1, title: '首页', path: '/home' ,iclass:'fa fa-home'},
-                { id: 2, title: '订单', path: '/order' ,iclass:'fa fa-file-text-o'},
+                { id: 2, title: '店铺', path: '/order/0' ,iclass:'fa fa-file-text-o'},
                 { id: 3, title: '我的', path: '/mine' ,iclass:'fa fa-user-o'}
             ]
         }
