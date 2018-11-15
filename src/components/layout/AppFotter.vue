@@ -1,7 +1,8 @@
 <template>
     <footer id="app-footer">
         <div class="footer-main">
-            <router-link class="footer-item" tag = "div" :to = "nav.path" active-class="select"
+            <router-link class="footer-item" tag = "div" :to = "nav.path" 
+                active-class="select"
                 v-for='nav in navs'
                 :key='nav.id'
             >

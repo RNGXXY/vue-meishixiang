@@ -46,12 +46,29 @@ export default {
         //   console.log('this is current swiper instance object', this.swiper)
         //   this.swiper.slideTo(3, 1000, false)
     },
-    async beforeCreate(){
-        let res = await this.$http({
-            url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0',
-            react: false
-        },true)
-        this.billboards = res.data.data.runBanner
+    // async created(){
+    //     let res = await this.$http({
+    //         url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0',
+    //         params:{cityId:this.$store.state.chunks.city.cityId},
+    //         react: false
+    //     },true)
+    //     this.billboards = res.data.data.runBanner
+    // },
+    watch:{
+        '$store.state.chunks.city':{
+            immediate:true,
+            handler(val){
+                if(!val.cityId) return false
+                this.$http({
+                    url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0&cityId=' + val.cityId,
+                    // params:{cityId:this.val.cityId},
+                    react: false
+                },true).then(res=>{
+                    this.billboards = res.data.data.runBanner
+                })
+                
+            }
+        }
     }
 }
 
@@ -61,11 +78,16 @@ export default {
 <style lang="scss">
     .app-home-banner{
         height: 6.24rem;
-        background: url('/images/ydq.jpg');
+        // background: url('/images/banner.png');
         .banner-img{
             height: 6.24rem;;
             img{
                 height: 100%;
+            }
+        }
+        .swiper-pagination{
+            .swiper-pagination-bullet{
+                background: #EF7F1D;
             }
         }
     }

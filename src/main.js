@@ -9,17 +9,39 @@ import '@libs/flexible'
 import '@libs'
 // 引入路由工具
 import router from './router'
+// 引入进度条组件 
+import VueProgressBar from 'vue-progressbar'
+
+import store from '@/store'
 
 // 控制那个小绿不要亮  
 // Vue.config.devtools = 'false'
 // 去掉vue默认在config输出的那两行 
 Vue.config.productionTip = false
+
+
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
  
+Vue.use(VueProgressBar, options)
+
 // 根实例 
 new Vue({
   //控制往根组件App里放什么东西，在根实例里render函数渲染根组件 
   // 任何一个项目需要一个根实例，根实例需要一个根组件
   router,   // 将router挂载到根实例，从此任何组件都可以使用到$router （路由工具） ,$route (路由属性)
+  store,
   render: h => h(App)
 
   // render:(createElement)=>{

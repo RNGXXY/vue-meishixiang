@@ -17,6 +17,18 @@
             </div>
             
         </div>
+        <div class="variety">
+            <div class="variety-row">
+                <div class="img-box">
+                    <img src="http://51wm-pic1.oss-cn-hangzhou.aliyuncs.com/merchantAd/25e5b45c-3aa3-49cd-b3cf-e0f4eda7a26f.png" alt="">
+                </div>
+            </div>
+            <div class="variety-row">
+                <div class="img-box">
+                    <img src="http://51wm-pic1.oss-cn-hangzhou.aliyuncs.com/merchantAd/3286c143-0565-41be-a663-9149a13f01b4.png" alt="">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -82,6 +94,29 @@ export default {
 
                     }
                 }
+            }
+        }
+        .variety{
+            padding: .266667rem;
+            height: 4.8rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .variety-row{
+                width: 4.533333rem;
+                height: 4.533333rem;
+                box-shadow: 0px 0px 8px #888888;
+                border-radius: 10px;
+                .img-box{
+                    width: 100%;
+                    height: 100%;
+                    margin: auto;
+                    img{
+                        width: 100%;
+                    }
+                }
+
             }
         }
     }

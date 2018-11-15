@@ -5,7 +5,7 @@
                 <img src="/images/login.png" alt="">
             </div>
             <div class="mine-sign">
-                <h1 v-if="isSign">膤小羽</h1>
+                <h1 v-if="isSign">{{usernum}}</h1>
                 <h1 v-else>登录/注册</h1>
             </div>
         </div>
@@ -21,10 +21,10 @@
                     </div>
                 </li>
             </ul> 
-            <div class="exit" v-if="isSign">
-                <router-link to='/login' tag="div">
+            <div class="exit" v-if="isSign" @click="exit">
+                <div >
                     <p>退出登录</p>
-                </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -36,6 +36,7 @@ export default {
    data(){
        return {
            isSign:false,
+           usernum:'',
            mineItems:[
                {id:1,title:'吉分兑换'},
                {id:2,title:'优惠券'},
@@ -45,13 +46,49 @@ export default {
            ]
        }
    },
-   methods:{
-       toLogin(){
-           if(!this.isSign){
-               this.$router.replace({name:'login'})
-           }
-       }
-   }
+    methods:{
+        toLogin(){
+            console.log(this.isSign)
+            if (!this.isSign) {
+                    this.$router.push({name:'login'})
+            } else {
+                console.log('已登录')
+            } 
+           
+        },
+        exit(){
+            localStorage.removeItem('userInfo')
+            this.isSign = false
+            this.$router.push({name:'login'})
+        }
+    },
+    // watch:{
+    //     isSign:{
+    //         immediate:true,
+    //         handler(){
+    //             let phonenum = JSON.parse(localStorage.getItem('userInfo')).phone
+    //             this.usernum = phonenum
+    //             if (!phonenum) {
+                   
+    //                 return false
+    //             }else{
+                    
+    //                 return true
+    //             }
+    //         }
+    //     }
+    // },
+    beforeRouteEnter(to,from,next){
+        let phonenum = JSON.parse(localStorage.getItem('userInfo')).phone
+        next(vm=>{
+            if (!phonenum) {
+                vm.isSign = false
+            }else{
+                vm.usernum = phonenum
+                vm.isSign = true
+            }
+        })
+    }
 }
 </script>
 

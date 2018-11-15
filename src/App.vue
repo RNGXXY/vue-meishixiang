@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <app-header></app-header>
+    <vue-progress-bar></vue-progress-bar>
+    <app-header ref='header'></app-header>
     <!-- <app-home></app-home> -->
     <main>
-      <router-view></router-view>
+      
+      <keep-alive include="app-citys">
+        
+          <router-view></router-view>
+       
+      </keep-alive>
+      
     </main>
     <!-- <app-fotter></app-fotter> -->
   </div>
@@ -21,9 +28,35 @@
       AppHeader,
       // AppFotter
     },
-    mounted(){
-         
-    }
+    mounted () {
+    //  [App.vue specific] When App.vue is finish loading finish the progress bar
+    this.$Progress.finish()
+  },
+  beforeCreate(){
+    this.$store.dispatch('shopcar/initGeetInfo')
+  },
+  created () {
+    //  [App.vue specific] When App.vue is first loaded start the progress bar
+    this.$Progress.start()
+    //  hook the progress bar to start before we move router-view
+    this.$router.beforeEach((to, from, next) => {
+      //  does the page we want to go to have a meta.progress object
+      if (to.meta.progress !== undefined) {
+        let meta = to.meta.progress
+        // parse meta tags
+        this.$Progress.parseMeta(meta)
+      }
+      //  start the progress bar
+      this.$Progress.start()
+      //  continue to next page
+      next()
+    })
+    //  hook the progress bar to finish after we've finished moving router-view
+    this.$router.afterEach((to, from) => {
+      //  finish the progress bar
+      this.$Progress.finish()
+    })
+  }
   }
 
 </script>
@@ -42,8 +75,9 @@ body,html,#app{
   main{
     position: absolute;
     width: 100%;
-    top: 1.173333rem;
-    bottom: 1.6rem;
+    height: 100%;
+    padding-top: 1.173333rem;
+    padding-bottom: 1.6rem;
     overflow: auto;
   }
 }

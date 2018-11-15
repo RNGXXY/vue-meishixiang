@@ -1,16 +1,16 @@
 <template>
     <li class="shop-item" ref="orderItem" v-if="!isDelete">
         <div class="item-main" >
-            <div class="item-left">
+            <router-link class="item-left"  tag="div" :to = "{name:'meal',params:{id : shopinfo.id}, query:{name:shopinfo.name}}">
                 <div class="img-box">
-                    <img :src='"https://fuss10.elemecdn.com/"+shopinfo.image_path+".jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"' alt="">
+                    <img v-lazy ='"https://fuss10.elemecdn.com/"+imgPath+".jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"' alt="">
                 </div>
-            </div>
+            </router-link> 
             <div class="item-right">
                 <div class="right-top right-flex">
                     <span class="pingpai">品牌</span>
                     <h2 class="shop-name">{{shopinfo.name}}</h2>
-                    <p class="icon" @click="dislike=true">
+                    <p class="icon" @click = "dislike=true">
                         <i class="fa fa-times-circle-o"></i>
                     </p>
                 </div>
@@ -55,27 +55,38 @@ export default {
     },
     props:['shopinfo'],
     methods: {
+       
         todelete(){
-                        
             this.$destroy()
         },
-        async getshops() {
-            let res = await this.$http({
-                url:"/waimai/v3/restaurants?latitude=39.990348&longitude=116.359323&extras[]=activities&extras[]=tags&extra_filters=home&order_by=0&rank_id=b6ea08a4065a42ab95dd37a49b2b45ef&terminal=h5",
-                params: {
-                    offset: 24,
-                    limit: 8
-                }
-            },true);
-        },
+        // async getshops() {
+        //     let res = await this.$http({
+        //         url:"/waimai/v3/restaurants?latitude=39.990348&longitude=116.359323&extras[]=activities&extras[]=tags&extra_filters=home&order_by=0&rank_id=b6ea08a4065a42ab95dd37a49b2b45ef&terminal=h5",
+        //         params: {
+        //             offset: 24,
+        //             limit: 8
+        //         } 
+        //     },true);
+        // },
         
+    },
+    // filters:{
+    //     imgPath:(val)=>{
+    //         return val.slice(0,1)+'/'+val.slice(1,3)+'/'+val.slice(3)
+    //         // console.log(path)
+    //         // return path
+    //     }  
+    // },
+    computed:{
+        imgPath(){
+            return this.shopinfo.image_path.slice(0,1)+'/'+ this.shopinfo.image_path.slice(1,3)+'/'+this.shopinfo.image_path.slice(3)
+        }
     },
     mounted() {
         // this.getshops();
     },
     beforeDestroy(){
         this.$el.remove()
-        console.log('beforeDestroy')
     }
 }
 </script>
@@ -96,6 +107,8 @@ export default {
             align-items: center;
             .item-left{
                 .img-box{
+                    background: url('/images/msbj.png') no-repeat ;
+                    background-size: 100% 100%;
                     height: 2.666667rem;
                     width: 2.666667rem;
                     img{
@@ -138,7 +151,7 @@ export default {
                     }
                     .icon{
                         text-align: right;
-                        margin-left: .266667rem;
+                        padding-left: .266667rem;
                     }
                 }
                 .right-middle{

@@ -15,6 +15,13 @@ module.exports={
                     '^/waimai': ''
                 }
             },
+            '/pizza':{
+                target:'https://h5.ele.me/pizza/shopping/',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/pizza': ''
+                }
+            },
             '/jiyejia':{
                 target:'http://jyj.4008-197-197.com/',
                 changeOrigin:true,
@@ -27,6 +34,13 @@ module.exports={
                 changeOrigin: true,
                 pathRewrite: {
                   '^/mz': ''
+                }
+            },
+            '/bd': {
+                target: 'http://api.map.baidu.com/',
+                changeOrigin: true,
+                pathRewrite: {
+                  '^/bd': ''
                 }
             }
             
@@ -42,6 +56,7 @@ module.exports={
               .set('@c',resolve('src/components')) 
               .set('@pages',resolve('src/pages'))
               .set('@util', resolve('src/util'))
+              .set('@store', resolve('src/store'))
     }
 }
 

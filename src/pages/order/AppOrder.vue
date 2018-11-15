@@ -12,8 +12,16 @@
            
         </div>
         <keep-alive>
-           <app-order-list :order_by = "order_by"></app-order-list>
+            <app-order-list ref="list" :order_by = "order_by" :isBackShow.sync = "isBackShow"></app-order-list>
         </keep-alive>
+        <transition
+            enter-active-class="fadeIn"
+            leave-active-class="fadeOut"
+        >
+            <div @click = "backTop" v-if = "isBackShow"  class="back-top animated">
+                <i class="fa fa-arrow-up"></i>
+            </div>  
+        </transition>
     </div>
 </template>
 
@@ -27,13 +35,20 @@ export default {
     props: ['url'], // 路由组件传参，将参数与路由解耦 $route.params.url -> this.url
     data(){
         return{
-            order_by:  0,
+            // order_by: 0 || this.url ,
+            order_by: 0 ,
+            isBackShow:false,
             listNavs:[
                 {id:1,title:'综合排序',order_by:0},
                 {id:2,title:'销量优先',order_by:5}
             ]
         }
-    }
+    },
+    methods:{
+            backTop (e) {
+            this.$refs.list.backTop()   //执行带有ref标记的子组件的方法
+        }
+    },
 };
 </script>
 
@@ -63,6 +78,20 @@ export default {
             color: #ffffff;
         }
     }
+    .back-top {
+        position: fixed;
+        right: .533333rem;
+        bottom: 2.133333rem;
+        background-color: rgba(0,0,0,0.7);
+        width: 1.28rem;
+        height: 1.28rem;
+        line-height: 1.28rem;
+        color: #fff;
+        text-align: center;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+   } 
     
 }
 </style>

@@ -2,6 +2,8 @@
 import Vue from 'vue'
 // 2、引入路由工具
 import VueRouter from 'vue-router'
+// 3、判断是否已经登录
+import auth from '@util/auth'
 
 // 3、全局注册
 Vue.use(VueRouter)
@@ -12,7 +14,9 @@ import AppOrder from '@pages/order/AppOrder'
 import AppMine from '@pages/mine/AppMine'
 import AppNotFound from '@pages/not-found/AppNotFound'
 import AppMeal from '@pages/meal/AppMeal'
+import AppPayment from '@pages/payment/AppPayment'
 import AppLogin from '@pages/login/AppLogin'
+import AppCity from '@pages/cities/AppCity'
 
 // 4、路由表
 const routes= [
@@ -36,17 +40,33 @@ const routes= [
     {
         path:'/mine',
         name:'mine',
-        component:AppMine    
+        component:AppMine,
+        beforeEnter:(to,from,next)=>{
+            let res = auth.authLogin()
+            next(res.phone ? true : { name:'login' })
+        }
+
     },
     {
-        path:'/meal',
+        path:'/meal/:id',
         name:'meal',
-        component:AppMeal    
+        component:AppMeal,
+        props:true    
+    },
+    {
+        path: '/payment',
+        name: 'payment',
+        component: AppPayment 
     },
     {
         path:'/login',
         name:'login',
         component:AppLogin    
+    },
+    {
+        path:'/cities',
+        name:'cities',
+        component:AppCity    
     },
     {
         path:'/not-found',

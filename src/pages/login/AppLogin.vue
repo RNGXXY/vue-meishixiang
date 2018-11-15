@@ -37,7 +37,8 @@ export default {
             phone:'',
             isResend: false,
             resendTime: 30,
-            code:''
+            code:'',
+            isSendCode:false
         }
     },
     methods:{
@@ -70,6 +71,7 @@ export default {
                 }
             },true)
             if(res.data.status === 0){
+                this.isSendCode = true
                 this.authCode()
             }          
         },
@@ -85,18 +87,24 @@ export default {
                     username: this.phone
                 }
             }, true)
-            console.log(res.data)
-            // if ( res.data.status === 0 ) { // 验证码发送成功
+            // console.log(res.data)
+            if ( res.data.status && this.code!="") { // 验证码发送成功
                 
             //     // 存储
-            //     localStorage.setItem('userInfo', JSON.stringify(res.data.data.data))
+                let info = {
+                    phone:this.phone
+                }
+                localStorage.setItem('userInfo',JSON.stringify(info))
             //     for (const key in res.data.data.data) {
             //         this.$cookies.set(key, res.data.data.data[key])
             //     }
 
-            //     this.$router.replace({name: 'user-info'})
-            // }
+                this.$router.back()
+            }else{
+                console.log('shuruyanzhengma')
+            }
         },
+        // 开始倒计时
         authCode(){
             this.isResend = true
             this.timer = setInterval(() => {
@@ -116,6 +124,12 @@ export default {
                 this.isCodeShow =result
             }
         }
+    },
+    mounted(){
+         this.$parent.$refs.header.isbackhome=true
+    },
+    beforeDestroy(){
+        this.$parent.$refs.header.isbackhome=false
     }
 }
 </script>
