@@ -50,11 +50,6 @@ export default {
                 width: 2rem;
                 box-shadow: 0 0 5px 0;
                 padding: .4rem 0; 
-                .meal-left-scroll{
-                    .meal-left-list{
-                        
-                    }
-                }
             }
             
         }
