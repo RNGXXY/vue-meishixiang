@@ -38,10 +38,7 @@ export default {
         AppMealFoodList,
         AppMealLeftItem
     },
-    mounted(){
-        console.log(this.$refs)
-        // this.$refs.active.classList.remove('meal-left-item-active')
-    }
+
 }
 </script>
 

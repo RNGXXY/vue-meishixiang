@@ -36,9 +36,7 @@ export default {
     beforeCreate(){
         this.$store.dispatch('shopcar/getRecordData')
     },
-    mounted(){
-        console.log(this.shopcar.consumption)
-    }
+
 }
 </script>
 
