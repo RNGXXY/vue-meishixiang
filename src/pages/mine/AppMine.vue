@@ -11,15 +11,17 @@
         </div>
         <div class="mine-box mine-bottom">
             <ul class="box-list">
-                <li class="box-item"
+                <router-link class="box-item"
                     v-for="item in mineItems"
                     :key='item.id'
+                    :to="item.path"
+                    tag="li"
                 >
                     <div class="box-item-connent">
                         <h2>{{item.title}}</h2>
                         <i class="fa fa-chevron-right"></i>
                     </div>
-                </li>
+                </router-link>
             </ul> 
             <div class="exit" v-if="isSign" @click="exit">
                 <div >
@@ -38,11 +40,11 @@ export default {
            isSign:false,
            usernum:'',
            mineItems:[
-               {id:1,title:'吉分兑换'},
-               {id:2,title:'优惠券'},
-               {id:3,title:'送餐地址库'},
-               {id:4,title:'修改密码'},
-               {id:5,title:'用户须知'},
+               {id:1,title:'我的订单',path:'payment'},
+               {id:2,title:'消费记录',path:'rerord'},
+               {id:3,title:'送餐地址库',path:''},
+               {id:4,title:'修改密码',path:''},
+               {id:5,title:'用户须知',path:''},
            ]
        }
    },
@@ -88,6 +90,9 @@ export default {
                 vm.isSign = true
             }
         })
+    },
+    mounted(){
+        this.$bus.$emit('isshowFooter')
     }
 }
 </script>

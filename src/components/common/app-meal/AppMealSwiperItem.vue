@@ -29,12 +29,10 @@
 </template>
 
 <script>
-import { Button ,Toast} from 'mint-ui';
+import { Toast} from 'mint-ui';
 import { mapActions } from 'vuex'
 export default {
-     components:{
-        [Button.name] : Button
-    },
+
     props:['info'],
     methods:{
         ...mapActions({

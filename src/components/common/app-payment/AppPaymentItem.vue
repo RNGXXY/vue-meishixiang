@@ -45,13 +45,14 @@ export default {
 
 <style lang="scss">
     .add-payment-item{
+         margin: .266667rem 0;
         .meal-right-item{
             border: 1px solid #e1e1e1;
             box-shadow: 0 0 5px #888888;
             border-radius: 40px;
             height: 140px;
             padding: .32rem;
-            margin: .266667rem 0;
+           
             display: flex;
             align-items: center;
             width:100%;

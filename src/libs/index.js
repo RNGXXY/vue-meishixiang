@@ -8,6 +8,9 @@ import 'swiper/dist/css/swiper.css'
 // 引入封装好的数据请求方式axios
 import ajax from '@util/axios'
 
+// filters
+import '@util/filters'
+
 // bus
 import bus from '@util/bus'
 

@@ -49,6 +49,9 @@ export default {
             this.$refs.list.backTop()   //执行带有ref标记的子组件的方法
         }
     },
+    mounted(){
+        this.$bus.$emit('isshowFooter')
+    }
 };
 </script>
 

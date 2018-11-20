@@ -1,5 +1,6 @@
 
 const states = {
-    payments:[]
+    payments:[],
+    consumption:[]
 }
 export default states

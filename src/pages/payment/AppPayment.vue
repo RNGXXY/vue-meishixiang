@@ -5,18 +5,13 @@
         >
             <h1>菜篮子空空的，快去添加吧</h1>
         </div>
-        <ul class="app-payment-food-list"
-            
-        >
-            <template
-                
-            >
-                <app-payment-item
-                    v-for = "item in shopcar.payments"
-                    :key = "item.id"
-                    :info = "item"
-                ></app-payment-item>
-            </template>
+        <ul class="app-payment-food-list">
+            <app-payment-item
+                v-for = "item in shopcar.payments"
+                :key = "item.id"
+                :info = "item"
+            ></app-payment-item>
+           
         </ul>
         <div class="meal-footer">
             <div class="footer-main">  
@@ -30,7 +25,7 @@
                     <h1 class="pay">￥<span>{{total.totalPrice}}</span></h1>
                 </div>
                 <div class="footer-right"
-                   
+                    @click="payOff"
                 >
                     <span class="choseOk">结算</span>
                     <i class="fa fa-chevron-right"></i>
@@ -42,7 +37,7 @@
 
 <script>
 import { mapState , mapMutations , mapActions, mapGetters} from 'vuex'
-import { Cell } from 'mint-ui';
+import { Cell , Toast} from 'mint-ui';
 
 import AppPaymentItem from '@c/common/app-payment/AppPaymentItem'
 export default {
@@ -54,7 +49,26 @@ export default {
         ...mapState(['shopcar']),
         ...mapGetters({
             total:'shopcar/total'
-        })
+        }),
+    },
+    methods:{
+        ...mapActions({
+            settleAccounts:'shopcar/settleAccounts'
+        }),
+        payOff(){
+            console.log(1111)
+            this.settleAccounts({
+                time:Date.now()
+            })
+            if (this.instance) this.instance.close()
+            this.instance = Toast({
+                message: '结算成功',
+                iconClass: 'fa fa-check'
+            });
+            setTimeout(() => {
+                instance.close();
+            }, 2000);
+        }
     },
     beforeRouteEnter(to,from,next){
         let phonenum = JSON.parse(localStorage.getItem('userInfo'))
@@ -63,13 +77,19 @@ export default {
                 vm.$router.replace({name:'login'})
             } 
         })
-    }
+    },
+    beforeDestroy () {
+        if (this.instance) this.instance.close() // 切换路由的时候，关掉框框
+    },
    
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .app-payment{
+        height: 100%;
+        padding-bottom: 1.6rem;
+        overflow: auto;
         .toselectFood{
             height: 2.666667rem;
             line-height: 2.666667rem;
@@ -77,17 +97,16 @@ export default {
             font-size: 16px;
         }
         .app-payment-food-list{
-            padding: 0 .266667rem 1.6rem;
+            height: 100%;
+            padding: 0 .266667rem ;
             
         }
         .meal-footer{
             height: 1.6rem;
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             background: none repeat scroll 0 0 #000;
-            transform: translateY(-60);
-            position: fixed;
             .footer-main{
                 height: 100%;
                 display: flex;

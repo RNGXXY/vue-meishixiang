@@ -70,8 +70,59 @@ const api = {
                 })
             },200)
         })
-    }
+    },
 
+    // 结算并存入数据库
+    settleAccounts({time}){
+        return new Promise(resolve=>{
+            setTimeout(async ()=>{
+                let consumption  =[]
+                let  { payments } =await this.getGoods()
+                payments.forEach(item=>{
+                    item.time = time
+                    consumption.unshift(item)
+                })
+                // _.forEach( payments , item=>
+                //     item.time = time ,
+                //     consumption.unshift(item)
+                // )
+                // let consumption = payments
+                this.saveSettleAccounts(consumption)
+                let { currentConsumption } =await this.getSettleAccounts()
+                payments = []
+                this.updataGoods(payments)
+                console.log(currentConsumption)
+                resolve({
+                    status:200,
+                    currentConsumption,
+                    payments
+                })
+            },200)
+        })
+    },
+
+    // 将结算存入消费记录,并做更新
+    async saveSettleAccounts(thisConsumption){ 
+        // 上一次更新的消费记录
+        let { currentConsumption } =await this.getSettleAccounts()
+        // console.log(thisConsumption,currentConsumption)
+        // 这一次的加上上一次的
+        let thisSettleAccounts = _.concat( thisConsumption , currentConsumption )
+        localStorage.setItem('consumption',JSON.stringify(thisSettleAccounts))
+        return thisSettleAccounts
+    },
+
+    //获取消费记录 
+    getSettleAccounts(){
+       return new Promise (resolve=>{
+            setTimeout(()=>{
+                resolve({
+                    status:200,
+                    currentConsumption : localStorage.consumption ? JSON.parse( localStorage.consumption ) : [] 
+                })
+            },200)
+       })
+    }
 }
 
 export default api  

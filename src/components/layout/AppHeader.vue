@@ -45,8 +45,6 @@ export default {
                 type:'chunks/getCurrentPosition'
             })
         }
-       
-        
     },
     data(){
         return{
@@ -61,22 +59,24 @@ export default {
       AppFotter
     },
     methods:{
+       
         createTitle(to){
             let _to = to || this.$route
             switch(_to.name){
                 case 'order' : return '美食巷店铺';
                 case 'mine' :  return '我的美食巷';
                 case 'home' :  return '美食巷';
-                case 'citys' : return '城市列表';
-                case 'login' : return '登录';
-                case 'payment' : return '菜篮子';
-                case 'cities' :  return '城市选择';
+                // case 'citys' : this.isbackhome = true ; return '城市列表';
+                case 'login' : this.isbackhome = true ; return '登录';
+                case 'payment' : this.isbackhome = true ; return '菜篮子';
+                case 'rerord' : this.isbackhome = true ; return '消费记录';
+                case 'cities' : this.isbackhome = true ; return '城市选择';
                 case 'meal' : return _to.query.name;
                 default :    return '美食巷' 
             } 
         },
-        backtohome(){           
-            this.$router.back()
+        backtohome(){     
+            this.$router.back()     
         }  
     },
     computed:{
@@ -85,9 +85,17 @@ export default {
             return this.title == '美食巷'
         }
     },
+    mounted(){
+        
+        this.$bus.$on('isshowFooter',()=>{
+            this.useFooter = true
+        })
+    },
     created(){
+        
         this.title = this.createTitle()
         this.$router.beforeEach((to,from,next)=>{
+   
             this.title = this.createTitle(to)
             let routeName = to.name
             switch(routeName){
@@ -110,6 +118,7 @@ export default {
         border-bottom: 2px solid #ff8600;
         position: fixed;
         z-index: 10;
+        background: #ffffff;
         .header-main{
             height: 100%;
             padding: .133333rem;

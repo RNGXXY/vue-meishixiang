@@ -17,6 +17,8 @@ export default {
         AppHomeBody
     },
     mounted(){
+        this.$bus.$emit('isshowFooter')
+
         this.scroll=scroll({
             el:this.$refs.home,
             handler:()=>{},

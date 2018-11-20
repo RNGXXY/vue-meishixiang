@@ -16,8 +16,9 @@ import AppNotFound from '@pages/not-found/AppNotFound'
 import AppMeal from '@pages/meal/AppMeal'
 import AppPayment from '@pages/payment/AppPayment'
 import AppLogin from '@pages/login/AppLogin'
-import AppCity from '@pages/cities/AppCity'
-
+import AppCity from '@pages/cities/AppCity' 
+import AppRecord from '@pages/record/AppRecord'  
+ 
 // 4、路由表
 const routes= [
 //    8、配置路由表
@@ -57,6 +58,11 @@ const routes= [
         path: '/payment',
         name: 'payment',
         component: AppPayment 
+    },
+    {
+        path: '/rerord',
+        name: 'rerord',
+        component: AppRecord 
     },
     {
         path:'/login',
