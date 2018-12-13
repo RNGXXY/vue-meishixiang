@@ -70,6 +70,7 @@ export default {
     props:['id'],
     data() {
         return {       
+            // swiper参数配置
             mealSwiperOption: {
                 // some swiper options/callbacks
                 // 所有的参数同 swiper 官方 api 参数
@@ -80,6 +81,7 @@ export default {
                 freeModeMomentumBounceRatio : 3,    //反弹，值越大产生的边界反弹效果越明显，反弹距离越大。
                 
             },
+            // 要渲染的数据，因为接口请求不到，所以用了本地json文件中存储的数据
             billboards:infos.recommend[0].items
         }
     },
@@ -101,9 +103,7 @@ export default {
         this.getInfo()
     },    
 }
-// https://h5.ele.me/pizza/shopping/restaurants/431375/batch_shop?user_id=114716584&
-// code=0.003509798536866393&extras=%5B%22activities%22%2C%22albums%22%2C%22license%22%2C%22identification%
-// 22%2C%22qualification%22%5D&terminal=h5&latitude=39.135884&longitude=117.210061
+
 </script>
 
 <style lang="scss">

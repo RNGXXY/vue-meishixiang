@@ -1,6 +1,8 @@
 <template>
     <li class="shop-item" ref="orderItem" v-if="!isDelete">
         <div class="item-main" >
+            <!-- query是在头部中用的，因为接口不能用，所以只能用这么low的办法了 -->
+            <!-- params是同过路由组件传参中参数的写法，商家详情页需要这个id去获取详情数据 -->
             <router-link class="item-left"  tag="div" :to = "{name:'meal',params:{id : shopinfo.id}, query:{name:shopinfo.name}}">
                 <div class="img-box">
                     <img v-lazy ='"https://fuss10.elemecdn.com/"+imgPath+".jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"' alt="">
@@ -53,11 +55,11 @@ export default {
             isDelete:false
         }
     },
-    props:['shopinfo'],
+    props:['shopinfo'], //父组件传过来的
     methods: {
        
         todelete(){
-            this.$destroy()
+            this.$destroy() //销毁组件的方法
         },
         // async getshops() {
         //     let res = await this.$http({
@@ -70,7 +72,8 @@ export default {
         // },
         
     },
-    // filters:{
+    // 过滤器只有两种语法，双花括号插值和 v-bind 表达式
+    // filters:{    
     //     imgPath:(val)=>{
     //         return val.slice(0,1)+'/'+val.slice(1,3)+'/'+val.slice(3)
     //         // console.log(path)

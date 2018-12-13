@@ -33,6 +33,7 @@
 
 <script>
 import { Button , Toast  } from 'mint-ui';
+// Button使用的时候需要注册，Toast不需要，具体看文档
 import { mapState , mapMutations , mapActions } from 'vuex'
 import { UPDATE_CAR_GOODS } from '@/store/shopcar/mutation-types'
 export default {

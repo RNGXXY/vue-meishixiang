@@ -13,6 +13,7 @@ const store = new Vuex.Store({
         chunks,
         shopcar
     },
+    // 使用插件 
     plugins:[saveCityInStorage]
 })
 

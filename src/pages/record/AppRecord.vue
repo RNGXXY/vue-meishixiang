@@ -19,20 +19,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
-    data(){
-        return{
-            recordList:[]
-        }
-    },
+    // data(){
+    //     return{
+    //         recordList:[]
+    //     }
+    // },
     computed:{
         ...mapState(['shopcar'])
     },
-    methods:{
-        
-
-    },
+    // 上来先获取之前的消费记录，渲染出来，数据存在数据库当中的
     beforeCreate(){
         this.$store.dispatch('shopcar/getRecordData')
     },
@@ -42,7 +39,6 @@ export default {
 
 <style lang="scss">
     .app-record{
-
         .app-record-list{
             .app-record-item{
                 height: 2.666667rem;

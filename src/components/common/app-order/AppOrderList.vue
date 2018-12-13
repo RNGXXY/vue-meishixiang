@@ -52,7 +52,7 @@ export default {
             this.scroll.scrollTo(0,0,200)
         },
         async getshops() {  // 加载的主要逻辑
-             // 如果没有更多了，就去请求了
+             // 如果没有更多了，就去请求了，顺便把那个框框打开
             if ( !this.hasMore ) {
                 // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
                 if (this.instance) this.instance.close()
@@ -83,8 +83,10 @@ export default {
         }
     },
     beforeDestroy () {
-        if (this.instance) this.instance.close() // 切换路由的时候，关掉框框
+        if (this.instance) this.instance.close() // 切换路由的时候（组件销毁），关掉框框
     },
+
+    // 在mounted中注册了滚动，人家提供的就是在mounted里面
     mounted() {
        this.scroll = scroll({
            el: this.$refs.root,

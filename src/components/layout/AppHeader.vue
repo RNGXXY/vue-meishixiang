@@ -55,8 +55,8 @@ export default {
             isbackhome:false
         }
     },
-     components:{   
-      AppFotter
+    components:{   
+        AppFotter
     },
     methods:{
        
@@ -71,7 +71,7 @@ export default {
                 case 'payment' : this.isbackhome = true ; return '菜篮子';
                 case 'rerord' : this.isbackhome = true ; return '消费记录';
                 case 'cities' : this.isbackhome = true ; return '城市选择';
-                case 'meal' : return _to.query.name;
+                case 'meal' : return _to.query.name;    // 从商家列表跳到商家详情页的时候，从query中取得商家名称的信息（因为接口不能用了，只能采用这么low的办法了）
                 default :    return '美食巷' 
             } 
         },

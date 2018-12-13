@@ -2,7 +2,7 @@
 import Vue from 'vue'
 // 2、引入路由工具
 import VueRouter from 'vue-router'
-// 3、判断是否已经登录
+// 判断是否已经登录
 import auth from '@util/auth'
 
 // 3、全局注册
@@ -87,9 +87,9 @@ const routes= [
 
 // 5、实例化路由工具
 const router  = new VueRouter({
-    // 1、选择路由模式
+    // (1)选择路由模式
     mode:'history',
-    // 2、引入路由表
+    // (2)引入路由表
     routes
 })
 

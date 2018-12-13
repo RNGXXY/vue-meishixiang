@@ -56,10 +56,15 @@ export default {
             settleAccounts:'shopcar/settleAccounts'
         }),
         payOff(){
-            console.log(1111)
             this.settleAccounts({
                 time:Date.now()
+                // 传参通过对象的形式传
+                // payload({
+                //     type:ssss,
+                //     time:xxxxxx
+                // })
             })
+            // instance就是那个小弹框，从mt-ui里来的
             if (this.instance) this.instance.close()
             this.instance = Toast({
                 message: '结算成功',
@@ -70,7 +75,11 @@ export default {
             }, 2000);
         }
     },
+    // 组件内的守卫
     beforeRouteEnter(to,from,next){
+        // 在渲染该组件的对应路由被 confirm 前调用
+        // 不！能！获取组件实例 `this`
+        // 因为当守卫执行前，组件实例还没被创建
         let phonenum = JSON.parse(localStorage.getItem('userInfo'))
         next(vm=>{
             if (!phonenum) {

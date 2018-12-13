@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 // 上映时间
 
-Vue.filter('premiere', (timetamp, hasDay) => {
+Vue.filter('premiere', (timetamp, hasDay=false) => {
     let _date = new Date(timetamp)
     let _day = `  ${ formatDay(_date.getDay()) }`
     return `${(_date.getMonth() + 1)}月${_date.getDate()}日 ${_date.getHours()}:${_date.getMinutes()}${hasDay ? _day : ''}`

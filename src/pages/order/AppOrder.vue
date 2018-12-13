@@ -35,8 +35,8 @@ export default {
     props: ['url'], // 路由组件传参，将参数与路由解耦 $route.params.url -> this.url
     data(){
         return{
-            // order_by: 0 || this.url ,
-            order_by: 0 ,
+            order_by: 0 || this.url ,
+            // order_by: 0 ,
             isBackShow:false,
             listNavs:[
                 {id:1,title:'综合排序',order_by:0},
@@ -45,7 +45,7 @@ export default {
         }
     },
     methods:{
-            backTop (e) {
+        backTop (e) {
             this.$refs.list.backTop()   //执行带有ref标记的子组件的方法
         }
     },

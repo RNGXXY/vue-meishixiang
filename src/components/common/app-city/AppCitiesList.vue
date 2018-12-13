@@ -11,8 +11,9 @@
                     v-for = "city in value"
                     :key  = "city.id"
                     :title= "city.name" 
-                    @click.native = "changeCity(city)"
+                    @click.native = "changeCity(city)"  
                 ></mt-cell>
+                <!-- .native - 监听组件根元素的原生事件。 -->
             </mt-index-section>
         </mt-index-list>
     </div>
@@ -45,7 +46,8 @@ export default {
     //             }
     //         })
     //     },
-        changeCity(city){
+    
+        changeCity(city){   //city是上面通过循环得到的
             this.$store.commit({
                 type:'chunks/'+ CHANGE_CITY,
                 city:{
