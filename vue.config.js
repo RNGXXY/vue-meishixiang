@@ -15,6 +15,20 @@ module.exports={
                     '^/waimai': ''
                 }
             },
+            '/eleme':{
+                target:'https://h5.ele.me/',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/eleme': ''
+                }
+            },
+            '/eus':{
+                target:'https://h5.ele.me/restapi/eus',
+                changeOrigin:true,
+                pathRewrite:{
+                    '^/eus': ''
+                }
+            },
             '/pizza':{
                 target:'https://h5.ele.me/pizza/shopping/',
                 changeOrigin:true,

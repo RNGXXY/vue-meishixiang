@@ -59,56 +59,73 @@ export default {
         //         console.log(11,res)
         //     })
         // },
-        // 获取验证码
+
+        // // 获取验证码
+        // async getCode(){
+        //     if (this.isResend) return false;
+        //     let res = await this.$http({
+        //         url:'/mz/v4/api/code',
+        //         method:'POST',
+        //         data:{      
+        //             mobile:this.phone,
+        //             type: "2"
+        //         }
+        //     },true)
+        //     if(res.data.status === 0){
+        //         this.isSendCode = true
+        //         this.authCode()
+        //     }          
+        // },
+
+          // 获取验证码
         async getCode(){
             if (this.isResend) return false;
-            let res = await this.$http({
-                url:'/mz/v4/api/code',
-                method:'POST',
-                data:{      
-                    mobile:this.phone,
-                    type: "2"
-                }
-            },true)
-            if(res.data.status === 0){
-                this.isSendCode = true
-                this.authCode()
-            }          
+            this.isSendCode = true
+            this.authCode()
         },
+
+        // 登录验证
+        // async login(){
+        //     let res = await this.$http({
+        //         url: '/mz/v4/api/login',
+        //         method: 'POST',
+        //         data: {
+        //             // "2f3ee20be6a12d25c541a3d1dfe2f839"
+        //             loginType: 1,
+        //             password: this.code,
+        //             username: this.phone
+        //         }
+        //     }, true)
+        //     if ( res.data.status && this.code!="") { // 验证码发送成功
+        //         // 存储
+        //         let info = {
+        //             phone:this.phone
+        //         }
+        //         localStorage.setItem('userInfo',JSON.stringify(info))
+        //         this.$router.back()
+        //     }else{
+        //         console.log('shuruyanzhengma')
+        //     }
+        // },
+
         // 登录验证
         async login(){
-            let res = await this.$http({
-                url: '/mz/v4/api/login',
-                method: 'POST',
-                data: {
-                    // "2f3ee20be6a12d25c541a3d1dfe2f839"
-                    loginType: 1,
-                    password: this.code,
-                    username: this.phone
-                }
-            }, true)
-            // console.log(res.data)
-            if ( res.data.status && this.code!="") { // 验证码发送成功
-                
-            //     // 存储
-                let info = {
-                    phone:this.phone
-                }
-                localStorage.setItem('userInfo',JSON.stringify(info))
-            //     for (const key in res.data.data.data) {
-            //         this.$cookies.set(key, res.data.data.data[key])
-            //     }
-
-                this.$router.back()
-            }else{
-                console.log('shuruyanzhengma')
+            if(!this.phone && !this.code ) return false;
+            let info = {
+                phone:this.phone
             }
+            localStorage.setItem('userInfo',JSON.stringify(info))
+            this.$router.back()
         },
+
         // 开始倒计时
         authCode(){
             this.isResend = true
             this.timer = setInterval(() => {
                 this.resendTime --
+                if ( this.resendTime === 25 ) {
+                   this.code=2019
+                }
                 if ( this.resendTime === 0 ) {
                     clearInterval(this.timer)
                     this.isResend = false

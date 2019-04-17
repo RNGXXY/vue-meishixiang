@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Indicator } from 'mint-ui';
-axios.defaults.withCredentials = true;// 设置携带cookie
+// axios.defaults.withCredentials = true;// 设置携带cookie
+axios.defaults.withCredentials = false;// 设置携带cookie
 
 const ajax = (options,all) => {
     let _react = options.react === undefined ? true : options.react

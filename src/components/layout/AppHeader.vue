@@ -4,7 +4,7 @@
             <div class="header-main">
                 <div class="header-left" >
                     <div class="img-box" v-if="isHome">
-                        <img src="/images/logo.png" alt="">
+                        <img src="http://sowcar.com/t6/696/1554643894x1707632091.png" alt="">
                     </div>
                     <div   class="backhome"
                         v-show = "isbackhome"

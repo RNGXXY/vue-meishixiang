@@ -2,7 +2,7 @@
     <div id="app-mine">
         <div class="mine-box mine-top" @click="toLogin">
             <div class="img-box">
-                <img src="/images/login.png" alt="">
+                <img src="http://sowcar.com/t6/696/1554643894x1707632091.png" alt="">
             </div>
             <div class="mine-sign">
                 <h1 v-if="isSign">{{usernum}}</h1>
