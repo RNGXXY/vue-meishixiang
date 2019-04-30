@@ -75,6 +75,9 @@ export default {
             }, 2000);
         }
     },
+    created(){
+        
+    },
     // 组件内的守卫
     beforeRouteEnter(to,from,next){
         // 在渲染该组件的对应路由被 confirm 前调用

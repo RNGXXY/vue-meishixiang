@@ -2,9 +2,9 @@
     <div class="add-meal-food-item">
         
          <app-meal-food-info
-             v-for="item in value"
-            :key="item.item_id"
-            :item = 'item'
+            :item = 'value'
+            :id="id"
+            :shopName="shopName"
          ></app-meal-food-info>   
        
     </div>
@@ -18,11 +18,11 @@ export default {
         AppMealFoodInfo
     },
     computed:{
-
+        
     },
-    
-    props:['value'],
-    
+    created(){
+    },
+    props:['value','id','shopName'],
 }
 </script>
 

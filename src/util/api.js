@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 const api = {
     // 向购物车中增加一条数据
-    addGoods({id,name,price,count=1,imgUrl}){
+    addGoods({id,name,price,count=1,imgUrl,shopId,shopName}){
         // 返回一个promise对象,方便前端调用
         return new Promise(resolve=>{
             // 模拟后端请求接口
@@ -16,7 +16,7 @@ const api = {
                     payment.count += count
                 } else {
                     payments.unshift({
-                        id,name,price,count,imgUrl
+                        id,name,price,count,imgUrl,shopId,shopName
                     })
                 }
                 // 4、更新数据库
@@ -84,6 +84,7 @@ const api = {
                     item.time = time
                     consumption.unshift(item)
                 })
+                console.log(22,consumption)
                 // 4、结算，并将数据保存到数据库当中
                 this.saveSettleAccounts(consumption)
                 // 5、结算完后获取一下消费记录数据，要返回给前端

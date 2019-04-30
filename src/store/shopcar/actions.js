@@ -38,6 +38,7 @@ const actions = {
 
     // 结算
     async settleAccounts({commit},payload){
+        console.log(11,payload)
         let res = await api.settleAccounts(payload)
         if(res.status === 200){
             commit({

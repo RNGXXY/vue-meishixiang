@@ -3,7 +3,7 @@
         <li class="meal-right-item ">
             <div class="meal-right-item-img">
                 <div class="img-box">
-                    <img :src = '"//fuss10.elemecdn.com/" + info.imgUrl + ".jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"' alt="">
+                    <img :src = '`http://localhost:3000${info.imgUrl}`' alt="">
                 </div>
             </div>
             <div class="meal-right-item-conent">

@@ -4,9 +4,13 @@
             <div class="meal-right-scroll">
                 <ul class="meal-right-list"
                     v-for="val in menu"
-                    :key=val.global_id
+                    :key=val._id
                 >
-                    <app-meal-food-item :value='val.foods'></app-meal-food-item>
+                    <app-meal-food-item 
+                        :id="id"
+                        :shopName="shopName"
+                        :value='val'>
+                    </app-meal-food-item>
                 </ul>
             </div>
         </div> 
@@ -24,9 +28,16 @@ export default {
     },
     data(){
         return{
-            menu:infos.menu
+            menu:[]
         }
     },
+    props:['id','shopName'],
+    async created(){
+        let resData = await this.$http({
+            url:'/cms/api/v1/menu/listAll'
+        })
+        this.menu = resData
+    }
 }
 </script>
 

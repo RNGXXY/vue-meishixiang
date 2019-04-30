@@ -29,7 +29,10 @@
             <div class="meal-body">
                 <div class="meal-main">
 
-                    <app-meal-body></app-meal-body>
+                    <app-meal-body
+                        :id="id"
+                        :shopName="shopName"
+                    ></app-meal-body>
 
                 </div>
             </div>
@@ -67,7 +70,7 @@ export default {
         AppMealBody,
         AppMealSwiperItem
     },
-    props:['id'],
+    props:['id','shopName'],
     data() {
         return {       
             // swiper参数配置
@@ -100,7 +103,7 @@ export default {
     },
     mounted(){ 
         // this.$parent.$refs.header.isbackhome=true
-        this.getInfo()
+        // this.getInfo()
     },    
 }
 

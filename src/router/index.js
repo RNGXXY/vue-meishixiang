@@ -44,7 +44,8 @@ const routes= [
         component:AppMine,
         beforeEnter:(to,from,next)=>{
             let res = auth.authLogin()
-            next(res.phone ? true : { name:'login' })
+            console.log(res)
+            next(res.userPhone ? true : { name:'login' })
         }
 
     },

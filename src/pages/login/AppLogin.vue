@@ -114,7 +114,18 @@ export default {
             let info = {
                 phone:this.phone
             }
-            localStorage.setItem('userInfo',JSON.stringify(info))
+            let resData = await this.$http({
+                url: '/cms/api/v1/userList/addUser',
+                method: 'POST',
+                data: {
+                    userPhone: this.phone
+                }
+            }, true)
+            if(resData.data.status == 200){
+                localStorage.setItem('userInfo',JSON.stringify(resData.data.data))
+            }else if(resData.data.status == 300){
+                localStorage.setItem('userInfo',JSON.stringify(resData.data.data.data))
+            }
             this.$router.back()
         },
 

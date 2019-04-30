@@ -42,7 +42,7 @@ export default {
            let { item_id : id , name }  = this.info
             let price = this.info.specfoods[0].price
             let imgUrl = this.info.image_path
-            this.addGoods({ id,name,price,count:this.count,imgUrl})
+            // this.addGoods({ id,name,price,count:this.count,imgUrl})
             this.count = 1
             // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
             if (this.instance) this.instance.close()
@@ -51,7 +51,7 @@ export default {
                 iconClass: 'fa fa-check'
             });
             setTimeout(() => {
-                instance.close();
+                this.instance.close();
             }, 1000);
         }
     },

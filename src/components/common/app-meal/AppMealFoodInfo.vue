@@ -4,12 +4,12 @@
             <div class="add-meal-food-item-info">
                 <div class="meal-right-item-img">
                     <div class="img-box">
-                        <img :src = '"//fuss10.elemecdn.com/" + item.image_path + ".jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/"' alt="">
+                        <img :src = '`http://localhost:3000${item.imgLogo}`' alt="">
                     </div>
                 </div>
                 <div class="meal-right-item-conent">
-                    <p class="conent-name">{{item.name}}</p>
-                    <p class="conent-price">￥<span>{{item.specfoods[0].price}}</span></p>
+                    <p class="conent-name">{{item.dishName}}</p>
+                    <p class="conent-price">￥<span>{{item.dishPrice}}</span></p>
                     <div class="item-order">
                        <div class="sub" @click = "count--">
                             <i class="fa fa-minus-circle"></i>
@@ -40,7 +40,7 @@ export default {
     components:{
         [Button.name] : Button
     },
-    props:['item'],
+    props:['item','id','shopName'],
     methods:{
         // ...mapMutations({
         //     addGoods:'shopcar/' + UPDATE_CAR_GOODS
@@ -49,10 +49,12 @@ export default {
             addGoods:'shopcar/addGoods'
         }),
         addGoodsHandler(){
-            let { item_id : id , name }  = this.item
-            let price = this.item.specfoods[0].price
-            let imgUrl = this.item.image_path
-            this.addGoods({ id,name,price,count:this.count,imgUrl})
+            let { _id : id , dishName:name }  = this.item
+            let price = this.item.dishPrice
+            let shopId = this.id
+            let shopName = this.shopName
+            let imgUrl = this.item.imgLogo
+            this.addGoods({ id,name,price,count:this.count,imgUrl,shopId,shopName})
             this.count = 1
             // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
             if (this.instance) this.instance.close()
@@ -61,7 +63,7 @@ export default {
                 iconClass: 'fa fa-check'
             });
             setTimeout(() => {
-                instance.close();
+                this.instance.close();
             }, 1000);
         }
     },

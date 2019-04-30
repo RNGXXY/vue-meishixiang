@@ -3,7 +3,7 @@
         <div class="item-main" >
             <!-- query是在头部中用的，因为接口不能用，所以只能用这么low的办法了 -->
             <!-- params是同过路由组件传参中参数的写法，商家详情页需要这个id去获取详情数据 -->
-            <router-link class="item-left"  tag="div" :to = "{name:'meal',params:{id : shopinfo.id}, query:{name:shopinfo.name}}">
+            <router-link class="item-left"  tag="div" :to = "{name:'meal',params:{id:shopinfo.id,shopName:shopinfo.name}, query:{id:shopinfo.id,shopName:shopinfo.name}}">
                 <div class="img-box">
                     <img v-lazy ='"https://fuss10.elemecdn.com/"+imgPath+".jpeg?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/"' alt="">
                 </div>
@@ -85,8 +85,9 @@ export default {
             return this.shopinfo.image_path.slice(0,1)+'/'+ this.shopinfo.image_path.slice(1,3)+'/'+this.shopinfo.image_path.slice(3)
         }
     },
-    mounted() {
+    created() {
         // this.getshops();
+        
     },
     beforeDestroy(){
         this.$el.remove()

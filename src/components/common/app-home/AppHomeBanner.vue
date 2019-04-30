@@ -46,21 +46,14 @@ export default {
         //   console.log('this is current swiper instance object', this.swiper)
         //   this.swiper.slideTo(3, 1000, false)
     },
-    // async created(){
-    //     let res = await this.$http({
-    //         url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0',
-    //         params:{cityId:this.$store.state.chunks.city.cityId},
-    //         react: false
-    //     },true)
-    //     this.billboards = res.data.data.runBanner
-    // },
     watch:{
         '$store.state.chunks.city':{
             immediate:true,
             handler(val){
-                if(!val.cityId) return false
+                // if(!val.cityId) return false
                 this.$http({
-                    url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0&cityId=' + val.cityId,
+                    // url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0&cityId=' + val.cityId,
+                    url:'/jiyejia/Action?serviceId=3&actionId=103&key=132205579c6b7611&langType=0&cityId=12',
                     // params:{cityId:this.val.cityId},
                     react: false
                 },true).then(res=>{

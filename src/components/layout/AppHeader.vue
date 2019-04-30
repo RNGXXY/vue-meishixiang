@@ -4,7 +4,7 @@
             <div class="header-main">
                 <div class="header-left" >
                     <div class="img-box" v-if="isHome">
-                        <img src="http://sowcar.com/t6/696/1554643894x1707632091.png" alt="">
+                        <img src="http://localhost:3000/uploads/logos/meishixianglogo.png" alt="">
                     </div>
                     <div   class="backhome"
                         v-show = "isbackhome"
@@ -14,12 +14,13 @@
                     </div>
                     <span class="header-title">{{title}}</span>
                 </div>
-                <router-link class="header-right"  v-if="isHome"
+                <!-- <router-link class="header-right"  v-if="isHome"
                     :to="{name: 'cities'}"
                     tag="div"
                 >
                     <span >{{chunks.city?chunks.city.cityName:''}}</span>
-                </router-link>
+                </router-link> -->
+                <div class="header-right" ><span >天津</span></div>
             </div>
         </header> 
         <app-fotter
@@ -33,19 +34,19 @@ import AppFotter from '@c/layout/AppFotter'
 import { mapState } from 'vuex'
 import { CHANGE_CITY } from '@/store/chunks/muntation-types'
 export default {
-    beforeCreate(){
-        if (localStorage.city) {
-            this.$store.commit({
-                type: 'chunks/'+CHANGE_CITY,
-                city:JSON.parse(localStorage.city),
-                cities:JSON.parse(localStorage.cities)
-            })
-        } else {
-             this.$store.dispatch({
-                type:'chunks/getCurrentPosition'
-            })
-        }
-    },
+    // beforeCreate(){
+    //     if (localStorage.city) {
+    //         this.$store.commit({
+    //             type: 'chunks/'+CHANGE_CITY,
+    //             city:JSON.parse(localStorage.city),
+    //             cities:JSON.parse(localStorage.cities)
+    //         })
+    //     } else {
+    //          this.$store.dispatch({
+    //             type:'chunks/getCurrentPosition'
+    //         })
+    //     }
+    // },
     data(){
         return{
             // isHome:false,
@@ -71,7 +72,7 @@ export default {
                 case 'payment' : this.isbackhome = true ; return '菜篮子';
                 case 'rerord' : this.isbackhome = true ; return '消费记录';
                 case 'cities' : this.isbackhome = true ; return '城市选择';
-                case 'meal' : return _to.query.name;    // 从商家列表跳到商家详情页的时候，从query中取得商家名称的信息（因为接口不能用了，只能采用这么low的办法了）
+                case 'meal' : return _to.query.shopName;    // 从商家列表跳到商家详情页的时候，从query中取得商家名称的信息（因为接口不能用了，只能采用这么low的办法了）
                 default :    return '美食巷' 
             } 
         },

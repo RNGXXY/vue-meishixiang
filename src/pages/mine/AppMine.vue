@@ -2,10 +2,10 @@
     <div id="app-mine">
         <div class="mine-box mine-top" @click="toLogin">
             <div class="img-box">
-                <img src="http://sowcar.com/t6/696/1554643894x1707632091.png" alt="">
+                <img src="http://localhost:3000/uploads/logos/meishixianglogo.png" alt="">
             </div>
             <div class="mine-sign">
-                <h1 v-if="isSign">{{usernum}}</h1>
+                <h1 v-if="isSign">{{userName}}</h1>
                 <h1 v-else>登录/注册</h1>
             </div>
         </div>
@@ -39,6 +39,7 @@ export default {
        return {
            isSign:false,
            usernum:'',
+           userName:'',
            mineItems:[
                {id:1,title:'我的订单',path:'payment'},
                {id:2,title:'消费记录',path:'rerord'},
@@ -50,7 +51,6 @@ export default {
    },
     methods:{
         toLogin(){
-            console.log(this.isSign)
             if (!this.isSign) {
                     this.$router.push({name:'login'})
             } else {
@@ -81,12 +81,12 @@ export default {
     //     }
     // },
     beforeRouteEnter(to,from,next){
-        let phonenum = JSON.parse(localStorage.getItem('userInfo')).phone
+        let userInfo = JSON.parse(localStorage.getItem('userInfo'))
         next(vm=>{
-            if (!phonenum) {
+            if (!userInfo.userName) {
                 vm.isSign = false
             }else{
-                vm.usernum = phonenum
+                vm.userName = userInfo.userName
                 vm.isSign = true
             }
         })

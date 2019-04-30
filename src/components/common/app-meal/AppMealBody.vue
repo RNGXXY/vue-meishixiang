@@ -19,7 +19,10 @@
                     </ul>
                 </div>
             </div>  
-              <app-meal-food-list></app-meal-food-list>     
+              <app-meal-food-list
+                    :id="id"
+                    :shopName="shopName"
+              ></app-meal-food-list>     
         </div>
     </div>
 </template>
@@ -34,6 +37,7 @@ export default {
             menuInfo:infos.menu
         }
     },
+    props:['id','shopName'],
     components:{
         AppMealFoodList,
         AppMealLeftItem
