@@ -56,8 +56,11 @@ export default {
             settleAccounts:'shopcar/settleAccounts'
         }),
         payOff(){
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             this.settleAccounts({
-                time:Date.now()
+                time:Date.now(),
+                userId:userInfo._id,
+                userName:userInfo.userName
                 // 传参通过对象的形式传
                 // payload({
                 //     type:ssss,

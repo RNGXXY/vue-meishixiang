@@ -97,7 +97,8 @@ const api = {
                 resolve({
                     status:200,
                     currentConsumption,
-                    payments
+                    payments,
+                    consumption
                 })
             },200)
         })

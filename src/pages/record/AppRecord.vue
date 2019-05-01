@@ -2,14 +2,14 @@
     <div class="app-record">
         <ul class="app-record-list">
             <li class="app-record-item"
-                v-for="(recordItem,index) in shopcar.consumption"
+                v-for="(recordItem,index) in recordList"
                 :key='index'
             >
                 <div class="record-item-title">
                     <h2>{{recordItem.name}}</h2>       
                 </div>
                 <div class="record-item-info">
-                    <p class="record-time">{{recordItem.time | premiere(false) }}</p>
+                    <p class="record-time">{{recordItem.orderTime}}</p>
                     <p class="record-price"><span>￥{{recordItem.price}}</span>*<span>{{recordItem.count}}</span></p>
                 </div>
                 
@@ -21,17 +21,32 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    // data(){
-    //     return{
-    //         recordList:[]
-    //     }
-    // },
+    data(){
+        return{
+            recordList:[]
+        }
+    },
     computed:{
         ...mapState(['shopcar'])
     },
     // 上来先获取之前的消费记录，渲染出来，数据存在数据库当中的
-    beforeCreate(){
+    async beforeCreate(){
         this.$store.dispatch('shopcar/getRecordData')
+        let resData = await this.$http({
+            url:'/cms/api/v1/orderList/listByUser',
+            method:'POST',
+            data:{
+                userId:JSON.parse(localStorage.getItem('userInfo'))._id
+            }
+        })
+        let orderArr = []
+        resData.forEach((item,index)=>{
+            item.orderContent.forEach(orderItem=>{
+                orderItem.orderTime = item.orderTime
+                orderArr.push(orderItem)
+            })
+        })
+        this.recordList = orderArr
     },
 
 }

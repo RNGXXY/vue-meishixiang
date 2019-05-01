@@ -1,6 +1,6 @@
 import { UPDATE_CAR_GOODS ,SETTLE_ACCOUNTS } from './mutation-types'
 import api from '@util/api'
-
+import axios from '@util/axios'
 
 const actions = {
     // 添加数据
@@ -38,9 +38,19 @@ const actions = {
 
     // 结算
     async settleAccounts({commit},payload){
-        console.log(11,payload)
         let res = await api.settleAccounts(payload)
         if(res.status === 200){
+        console.log('订单内容：',res.consumption)
+        console.log('用户信息',payload)
+            axios({
+                url:'/cms/api/v1/orderList/addData',
+                method:'POST',
+                data:{
+                    userName:payload.userName,
+                    userId:payload.userId,
+                    orderContent:res.consumption
+                }
+            })
             commit({
                 type:SETTLE_ACCOUNTS,
                 currentConsumption : res.currentConsumption

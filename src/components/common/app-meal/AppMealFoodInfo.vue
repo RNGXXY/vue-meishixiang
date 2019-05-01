@@ -10,7 +10,7 @@
                 <div class="meal-right-item-conent">
                     <p class="conent-name">{{item.dishName}}</p>
                     <p class="conent-price">￥<span>{{item.dishPrice}}</span></p>
-                    <div class="item-order">
+                    <div class="item-order" v-if="item.dishNum >0">
                        <div class="sub" @click = "count--">
                             <i class="fa fa-minus-circle"></i>
                         </div>
@@ -20,6 +20,9 @@
                          <div class="add" @click = "count++">
                             <i class="fa fa-plus-circle"></i>
                         </div>
+                    </div>
+                    <div class="item-order" v-if="item.dishNum <= 0">
+                       <p style="text-align:center">么得了~~</p>
                     </div>
                     <div class="addcar" >
                         <mt-button type="danger" size="small" @click.native="addGoodsHandler">加入菜篮子</mt-button>
