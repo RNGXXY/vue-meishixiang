@@ -1,37 +1,40 @@
 <template>
-    <div class="app-payment">
-        <div class="toselectFood"
-            v-if = "shopcar.payments.length <= 0"
-        >
-            <h1>菜篮子空空的，快去添加吧</h1>
-        </div>
-        <ul class="app-payment-food-list">
-            <app-payment-item
-                v-for = "item in shopcar.payments"
-                :key = "item.id"
-                :info = "item"
-            ></app-payment-item>
-           
-        </ul>
-        <div class="meal-footer">
-            <div class="footer-main">  
-                <div class="footer-left">
-                    <div class="img-box">
-                        <img src="/images/cart.png" alt="">
-                        <p class="totalCount">{{total.totalCount}}</p>
+    <div>
+        <div class="app-payment">
+            <div class="toselectFood"
+                v-if = "shopcar.payments.length <= 0"
+            >
+                <h1>菜篮子空空的，快去添加吧</h1>
+            </div>
+            <ul class="app-payment-food-list">
+                <app-payment-item
+                    v-for = "item in shopcar.payments"
+                    :key = "item.id"
+                    :info = "item"
+                ></app-payment-item>
+            
+            </ul>
+            <div class="meal-footer">
+                <div class="footer-main">  
+                    <div class="footer-left">
+                        <div class="img-box">
+                            <img src="/images/cart.png" alt="">
+                            <p class="totalCount">{{total.totalCount}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="footer-center">
-                    <h1 class="pay">￥<span>{{total.totalPrice}}</span></h1>
-                </div>
-                <div class="footer-right"
-                    @click="payOff"
-                >
-                    <span class="choseOk">结算</span>
-                    <i class="fa fa-chevron-right"></i>
+                    <div class="footer-center">
+                        <h1 class="pay">￥<span>{{total.totalPrice}}</span></h1>
+                    </div>
+                    <div class="footer-right"
+                        @click="isPay=true"
+                    >
+                        <span class="choseOk">结算</span>
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
+        <app-pay-page  v-if="isPay" :payPrice = total.totalPrice :handlePayPage='handlePayPage'></app-pay-page>
     </div>
 </template>
 
@@ -40,10 +43,19 @@ import { mapState , mapMutations , mapActions, mapGetters} from 'vuex'
 import { Cell , Toast} from 'mint-ui';
 
 import AppPaymentItem from '@c/common/app-payment/AppPaymentItem'
+import AppPayPage from './payPage'
+
 export default {
+     data(){
+        return{
+            isPay:false,
+            payOver:false
+        }
+    },
     components:{
         [Cell.name]: Cell,
-        AppPaymentItem
+        AppPaymentItem,
+        AppPayPage
     },
     computed:{
         ...mapState(['shopcar']),
@@ -74,8 +86,15 @@ export default {
                 iconClass: 'fa fa-check'
             });
             setTimeout(() => {
-                instance.close();
+                this.instance.close();
             }, 2000);
+        },
+        handlePayPage(){
+            this.isPay = !this.isPay
+            this.payOver = true
+            if(this.payOff){
+                this.payOff()
+            }
         }
     },
     created(){
