@@ -2,7 +2,7 @@
     <div id="app-mine">
         <div class="mine-box mine-top" @click="toLogin">
             <div class="img-box">
-                <img src="http://localhost:3000/uploads/logos/meishixianglogo.png" alt="">
+                <img src="/images/meishixianglogo.png" alt="">
             </div>
             <div class="mine-sign">
                 <h1 v-if="isSign">{{userName}}</h1>
@@ -43,9 +43,9 @@ export default {
            mineItems:[
                {id:1,title:'我的订单',path:'payment'},
                {id:2,title:'消费记录',path:'rerord'},
-               {id:3,title:'送餐地址库',path:''},
-               {id:4,title:'修改密码',path:''},
-               {id:5,title:'用户须知',path:''},
+            //    {id:3,title:'送餐地址库',path:''},
+            //    {id:4,title:'修改密码',path:''},
+               {id:5,title:'用户须知',path:'acquire'},
            ]
        }
    },

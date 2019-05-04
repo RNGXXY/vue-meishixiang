@@ -18,6 +18,7 @@ import AppPayment from '@pages/payment/AppPayment'
 import AppLogin from '@pages/login/AppLogin'
 import AppCity from '@pages/cities/AppCity' 
 import AppRecord from '@pages/record/AppRecord'  
+import AppAcquire from '@pages/acquire/AppAcquire'  
  
 // 4、路由表
 const routes= [
@@ -74,6 +75,11 @@ const routes= [
         path:'/cities',
         name:'cities',
         component:AppCity    
+    },
+    {
+        path:'/acquire',
+        name:'acquire',
+        component:AppAcquire    
     },
     {
         path:'/not-found',

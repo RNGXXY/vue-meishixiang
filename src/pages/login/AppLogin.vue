@@ -2,7 +2,7 @@
     <div id="app-login">
         <form @submit.prevent='login' class="login-form">
             <div class="login-title">
-				<h4>欢迎来到吉野家</h4>
+				<h4>欢迎来到美食巷</h4>
 			</div>
             <div class="header_right">
 				<div class="login_phone list-inset ">

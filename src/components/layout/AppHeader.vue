@@ -4,7 +4,7 @@
             <div class="header-main">
                 <div class="header-left" >
                     <div class="img-box" v-if="isHome">
-                        <img src="http://localhost:3000/uploads/logos/meishixianglogo.png" alt="">
+                        <img src="/images/meishixianglogo.png" alt="">
                     </div>
                     <div   class="backhome"
                         v-show = "isbackhome"
@@ -20,7 +20,7 @@
                 >
                     <span >{{chunks.city?chunks.city.cityName:''}}</span>
                 </router-link> -->
-                <div class="header-right" ><span >天津</span></div>
+                <!-- <div class="header-right" ><span >天津</span></div> -->
             </div>
         </header> 
         <app-fotter
@@ -71,6 +71,7 @@ export default {
                 case 'login' : this.isbackhome = true ; return '登录';
                 case 'payment' : this.isbackhome = true ; return '菜篮子';
                 case 'rerord' : this.isbackhome = true ; return '消费记录';
+                case 'acquire' : this.isbackhome = true ; return '用户须知';
                 case 'cities' : this.isbackhome = true ; return '城市选择';
                 case 'meal' : return _to.query.shopName;    // 从商家列表跳到商家详情页的时候，从query中取得商家名称的信息（因为接口不能用了，只能采用这么low的办法了）
                 default :    return '美食巷' 
