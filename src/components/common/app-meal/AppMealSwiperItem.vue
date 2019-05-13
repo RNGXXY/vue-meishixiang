@@ -10,11 +10,10 @@
             <div class="item-price">
                 ￥<span>{{info.specfoods[0].price}}</span>
             </div>
-            <div class="item-order">
+            <!-- <div class="item-order">
                 <div class="sub" @click = "count--">
                     <i class="fa fa-minus-circle"></i>
                 </div>
-                <!-- <span>选套餐</span> -->
                 <span class="counts" ref='num'>{{count}}</span>
                 
                     <div class="add" @click = "count++">
@@ -23,7 +22,7 @@
             </div>
             <div class="addcar" @click="addGoodsHandler">
                 加入菜篮子
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -76,7 +75,7 @@ export default {
     margin: 0 .133333rem;
     padding: .266667rem;
     width: 3.2rem;
-    height: 5.613333rem;
+    /* height: 5.613333rem; */
     box-shadow: 0 0 .133333rem #888888 inset;
     color: #333333;
     .item-img{

@@ -84,7 +84,6 @@ const api = {
                     item.time = time
                     consumption.unshift(item)
                 })
-                console.log(22,consumption)
                 // 4、结算，并将数据保存到数据库当中
                 this.saveSettleAccounts(consumption)
                 // 5、结算完后获取一下消费记录数据，要返回给前端
@@ -108,7 +107,6 @@ const api = {
     async saveSettleAccounts(thisConsumption){ 
         // 上一次更新的消费记录
         let { currentConsumption } =await this.getSettleAccounts()
-        // console.log(thisConsumption,currentConsumption)
         // 这一次的加上上一次的
         let thisSettleAccounts = _.concat( thisConsumption , currentConsumption )
         localStorage.setItem('consumption',JSON.stringify(thisSettleAccounts))

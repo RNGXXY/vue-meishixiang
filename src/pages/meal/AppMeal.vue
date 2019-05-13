@@ -136,7 +136,7 @@ export default {
                 }
             }
             .hot-seal{
-                height: 6rem;
+                /* height: 6rem; */
                 padding: .266667rem 0;
                 position: relative;
                 .hotCakes{

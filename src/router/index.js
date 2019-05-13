@@ -19,6 +19,9 @@ import AppLogin from '@pages/login/AppLogin'
 import AppCity from '@pages/cities/AppCity' 
 import AppRecord from '@pages/record/AppRecord'  
 import AppAcquire from '@pages/acquire/AppAcquire'  
+import AppAddressManage from '@pages/addressManage/AppAddressManage'  
+import AppAddressAdd from '@pages/addressAdd/AppAddressAdd'  
+import AppWaitReceiving from '@pages/waitReceiving/AppWaitReceiving'  
  
 // 4、路由表
 const routes= [
@@ -45,7 +48,7 @@ const routes= [
         component:AppMine,
         beforeEnter:(to,from,next)=>{
             let res = auth.authLogin()
-            console.log(res)
+            // console.log(res)
             next(res.userPhone ? true : { name:'login' })
         }
 
@@ -80,6 +83,21 @@ const routes= [
         path:'/acquire',
         name:'acquire',
         component:AppAcquire    
+    },
+    {
+        path:'/addressManage',
+        name:'addressManage',
+        component:AppAddressManage    
+    },
+    {
+        path:'/waitReceiving',
+        name:'waitReceiving',
+        component:AppWaitReceiving    
+    },
+    {
+        path:'/addressAdd',
+        name:'addressAdd',
+        component:AppAddressAdd    
     },
     {
         path:'/not-found',

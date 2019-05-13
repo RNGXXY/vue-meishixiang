@@ -14,13 +14,6 @@
                     </div>
                     <span class="header-title">{{title}}</span>
                 </div>
-                <!-- <router-link class="header-right"  v-if="isHome"
-                    :to="{name: 'cities'}"
-                    tag="div"
-                >
-                    <span >{{chunks.city?chunks.city.cityName:''}}</span>
-                </router-link> -->
-                <!-- <div class="header-right" ><span >天津</span></div> -->
             </div>
         </header> 
         <app-fotter
@@ -72,7 +65,10 @@ export default {
                 case 'payment' : this.isbackhome = true ; return '菜篮子';
                 case 'rerord' : this.isbackhome = true ; return '消费记录';
                 case 'acquire' : this.isbackhome = true ; return '用户须知';
+                case 'addressManage' : this.isbackhome = true ; return '地址管理';
+                case 'addressAdd' : this.isbackhome = true ; return '地址更新';
                 case 'cities' : this.isbackhome = true ; return '城市选择';
+                case 'waitReceiving' : this.isbackhome = true ; return '待收货';
                 case 'meal' : return _to.query.shopName;    // 从商家列表跳到商家详情页的时候，从query中取得商家名称的信息（因为接口不能用了，只能采用这么low的办法了）
                 default :    return '美食巷' 
             } 

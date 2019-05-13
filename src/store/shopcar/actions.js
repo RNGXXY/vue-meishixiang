@@ -40,15 +40,14 @@ const actions = {
     async settleAccounts({commit},payload){
         let res = await api.settleAccounts(payload)
         if(res.status === 200){
-        console.log('订单内容：',res.consumption)
-        console.log('用户信息',payload)
             axios({
                 url:'/cms/api/v1/orderList/addData',
                 method:'POST',
                 data:{
                     userName:payload.userName,
                     userId:payload.userId,
-                    orderContent:res.consumption
+                    orderContent:res.consumption,
+                    addressContent:payload.addressContent
                 }
             })
             commit({

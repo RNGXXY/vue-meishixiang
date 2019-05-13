@@ -41,11 +41,12 @@ export default {
            usernum:'',
            userName:'',
            mineItems:[
-               {id:1,title:'我的订单',path:'payment'},
+               {id:4,title:'购物车',path:'payment'},
+               {id:1,title:'我的外卖',path:'waitReceiving'},
                {id:2,title:'消费记录',path:'rerord'},
-            //    {id:3,title:'送餐地址库',path:''},
-            //    {id:4,title:'修改密码',path:''},
+               {id:3,title:'送餐地址',path:'addressManage'},
                {id:5,title:'用户须知',path:'acquire'},
+               {id:6,title:'客服热线：17695541995',path:''},
            ]
        }
    },

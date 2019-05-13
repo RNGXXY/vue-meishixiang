@@ -25,14 +25,36 @@
                     <div class="footer-center">
                         <h1 class="pay">￥<span>{{total.totalPrice}}</span></h1>
                     </div>
+                        <!-- @click="isPay=true" -->
+
                     <div class="footer-right"
-                        @click="isPay=true"
+                        @click="handleAddressSelect"
                     >
                         <span class="choseOk">结算</span>
                         <i class="fa fa-chevron-right"></i>
                     </div>
                 </div>
             </div>
+            <mt-popup
+                style="width:100%"
+                v-model="popupVisible"
+                position="bottom">
+                <div v-if="addressList.length">
+                    <div class="regionHeader">
+                        <p>已选择：{{addressContent}}</p>
+                        <i class="fa fa-check" @click="onClosePicker"></i>
+                    </div>
+                    <div class="regionContent" >
+                        <app-picker-pay 
+                            :addressList = "addressList"
+                            :onHandleAddressSelect="onHandleAddressSelect">
+                        </app-picker-pay>
+                    </div>
+                </div>
+                <div v-else>
+                    <router-link class="emptyAddress" tag = "div" to="/addressAdd"><p>没有收货地址，点击进行添加</p></router-link>
+                </div>
+            </mt-popup>
         </div>
         <app-pay-page  v-if="isPay" :payPrice = total.totalPrice :handlePayPage='handlePayPage'></app-pay-page>
     </div>
@@ -40,39 +62,51 @@
 
 <script>
 import { mapState , mapMutations , mapActions, mapGetters} from 'vuex'
-import { Cell , Toast} from 'mint-ui';
+import { Cell , Popup , Toast} from 'mint-ui';
 
 import AppPaymentItem from '@c/common/app-payment/AppPaymentItem'
 import AppPayPage from './payPage'
+import AppPickerPay from '@c/common/app-picker/AppPickerPay'
 
 export default {
      data(){
         return{
             isPay:false,
-            payOver:false
+            payOver:false,
+            popupVisible:false,
+            addressList:[],
+            addressContent:''
         }
     },
     components:{
         [Cell.name]: Cell,
+        [Popup.name]:Popup,
         AppPaymentItem,
-        AppPayPage
+        AppPayPage,
+        AppPickerPay
     },
     computed:{
-        ...mapState(['shopcar']),
+        ...mapState(['shopcar','address']),
         ...mapGetters({
             total:'shopcar/total'
         }),
     },
     methods:{
         ...mapActions({
-            settleAccounts:'shopcar/settleAccounts'
+            settleAccounts:'shopcar/settleAccounts',
+            getAddressListByUser:'address/getAddressListByUser'
         }),
+        onClosePicker(){
+            this.popupVisible = !this.popupVisible
+            this.isPay = true
+        },
         payOff(){
             let userInfo = JSON.parse(localStorage.getItem('userInfo'))
             this.settleAccounts({
                 time:Date.now(),
                 userId:userInfo._id,
-                userName:userInfo.userName
+                userName:userInfo.userName,
+                addressContent:this.addressContent
                 // 传参通过对象的形式传
                 // payload({
                 //     type:ssss,
@@ -89,12 +123,28 @@ export default {
                 this.instance.close();
             }, 2000);
         },
+        async handleAddressSelect(){
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            await this.getAddressListByUser({
+                userId:userInfo._id
+            })
+            this.addressList=[]
+            this.address.addressList.forEach(item=>{
+                item.content = item.cityName+'-'+item.areaName+'-'+item.detailedAddress
+                this.addressList.push(item)
+            })
+            this.addressContent = this.addressList.length?this.addressList[0].content:''
+            this.popupVisible=true
+        },
         handlePayPage(){
             this.isPay = !this.isPay
             this.payOver = true
             if(this.payOff){
                 this.payOff()
             }
+        },
+        onHandleAddressSelect(data){
+            this.addressContent = data
         }
     },
     created(){
@@ -197,5 +247,30 @@ export default {
                 }
             }
         }
+    }
+    .regionHeader{
+        height: 45px;
+        width: 100%;
+        border-bottom: 1px solid #ff8600;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        p{
+            flex:1;
+        }
+        i{
+            width:30px;
+            height:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .emptyAddress{
+        height: 2.666667rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
     }
 </style>

@@ -9,7 +9,8 @@
                 </div>
                 <div class="meal-right-item-conent">
                     <p class="conent-name">{{item.dishName}}</p>
-                    <p class="conent-price">￥<span>{{item.dishPrice}}</span></p>
+                        <p>剩余：{{item.dishNum | disCount}}份</p>
+                        <p class="conent-price">￥<span>{{item.dishPrice}}</span></p>
                     <div class="item-order" v-if="item.dishNum >0">
                        <div class="sub" @click = "count--">
                             <i class="fa fa-minus-circle"></i>
@@ -22,10 +23,10 @@
                         </div>
                     </div>
                     <div class="item-order" v-if="item.dishNum <= 0">
-                       <p style="text-align:center">么得了~~</p>
+                       <p style="text-align:center">已售空~~</p>
                     </div>
-                    <div class="addcar" >
-                        <mt-button type="danger" size="small" @click.native="addGoodsHandler">加入菜篮子</mt-button>
+                    <div  class="addcar" v-if="item.dishNum >0" >
+                        <mt-button type="danger" size="small" @click.native="addGoodsHandler(item.dishNum)">加入菜篮子</mt-button>
                     </div>
                 </div>
             </div>
@@ -51,23 +52,38 @@ export default {
         ...mapActions({
             addGoods:'shopcar/addGoods'
         }),
-        addGoodsHandler(){
+        addGoodsHandler(dishNum){
             let { _id : id , dishName:name }  = this.item
             let price = this.item.dishPrice
             let shopId = this.id
             let shopName = this.shopName
             let imgUrl = this.item.imgLogo
-            this.addGoods({ id,name,price,count:this.count,imgUrl,shopId,shopName})
-            this.count = 1
-            // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
-            if (this.instance) this.instance.close()
-            this.instance = Toast({
-                message: '加入成功',
-                iconClass: 'fa fa-check'
-            });
-            setTimeout(() => {
-                this.instance.close();
-            }, 1000);
+            if(this.count > dishNum ){
+                this.count = 1
+                // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
+                if (this.instance) this.instance.close()
+                this.instance = Toast({
+                    message: '库存不足',
+                    iconClass: 'fa fa-close'
+                });
+                setTimeout(() => {
+                    this.instance.close();
+                }, 1000);
+            }
+            else{
+                this.addGoods({ id,name,price,count:this.count,imgUrl,shopId,shopName})
+                this.count = 1
+                // 如果已经有一个了，就上一个关掉（拉了一次又拉了一次）
+                if (this.instance) this.instance.close()
+                this.instance = Toast({
+                    message: '加入成功',
+                    iconClass: 'fa fa-check'
+                });
+                setTimeout(() => {
+                    this.instance.close();
+                }, 1000);
+            }
+            
         }
     },
     data(){
@@ -80,6 +96,11 @@ export default {
             if(this.count<=1){
                 this.count=1;
             }
+        }
+    },
+    filters:{
+        disCount:(value)=>{
+            return value <= 0 ? 0 : value
         }
     },
     beforeDestroy () {
@@ -154,5 +175,10 @@ export default {
             }
             
         }
+    }
+    .disNumAndPrice{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
     }
 </style>
