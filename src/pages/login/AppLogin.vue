@@ -7,13 +7,13 @@
             <div class="header_right">
 				<div class="login_phone list-inset ">
 					<label class="item item-phone">
-						<input type="text" name="phone" v-model="phone"  placeholder="请输入正确手机号码"  required="" class="ng-pristine">
+						<input type="text" name="phone" AUTOCOMPLETE="off" v-model="phone"  placeholder="请输入正确手机号码"  required="" class="ng-pristine">
 					</label>
 				</div>
 				<div class="list-inset">
 					<div class="login_yznum">
                         <label class="item item-yznum">
-                            <input v-model="code" type="password"  placeholder="请输入验证码"  class="">
+                            <input v-model="code" AUTOCOMPLETE="off" type="number"  placeholder="请输入验证码"  class="">
                         </label>
                         <div class="login_verification"  @click="getCode">
                             <div class="login-button getYzm" >{{isResend?'重发('+resendTime+'s)':'发送验证码'}}</div>

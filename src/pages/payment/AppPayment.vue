@@ -116,7 +116,7 @@ export default {
             // instance就是那个小弹框，从mt-ui里来的
             if (this.instance) this.instance.close()
             this.instance = Toast({
-                message: '结算成功',
+                message: '结算成功，外卖即将派送，请注意接收',
                 iconClass: 'fa fa-check'
             });
             setTimeout(() => {
